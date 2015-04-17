@@ -5,10 +5,7 @@ var form = new Vue({
     id: "1234567890",
     jsonrpc: "2.0",
     method: "user/get",
-    params: "\
-{\n\
-  \"id\": 1\n\
-}",
+    params: JSON.stringify({id: 1}, null, 2),
     errorMessage: "",
     response: "",
     responsetable: ""
@@ -39,7 +36,7 @@ var form = new Vue({
         }
       }).done(function(data) {
         self._data.errorMessage = "";
-        self._data.response = prettyPrint(data, 2);
+        self._data.response = JSON.stringify(data, null, 2);
         self._data.responsetable = JsonHuman.format(data).outerHTML
 
       }).fail(function(data) {
