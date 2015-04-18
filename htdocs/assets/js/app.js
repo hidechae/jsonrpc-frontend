@@ -16,16 +16,20 @@ var form = new Vue({
 
       var self = this;
       var params;
+
       try {
         params = JSON.parse(self._data.params);
       } catch (e) {
         self._data.errorMessage = "Invalid json syntax";
+        self._data.response = "";
+        self._data.responsetable = "";
         return;
       }
 
       $.ajax({
         url: self._data.host,
         type: 'POST',
+        xhrFields: { withCredentials: true },
         data: {
           payload: {
             id: self._data.id,
@@ -41,6 +45,8 @@ var form = new Vue({
 
       }).fail(function(data) {
         self._data.errorMessage = "Failed to send request";
+        self._data.response = "";
+        self._data.responsetable = "";
       });
     }
   }
