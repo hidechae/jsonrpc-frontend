@@ -10,77 +10,91 @@
   <body>
     <div class="container" id="app">
       <h1>JSON-RPC TEST</h1>
-      <h3>Parameters</h3>
+      <div class="row">
+        <div class="col-sm-6">
+          <h3>Parameters</h3>
 
-      <form>
-        <div class="form-horizontal">
+          <form>
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">templates</label>
+                <div class="col-sm-10">
+                  <select multiple class="form-control" id="templates" v-on="change: changeTemplate" autofocus>
+                    <option v-repeat="templates" v-attr="selected:selected==$index?1:null">{{method}}</option>
+                  </select>
+                </div>
+              </div>
 
-          <div class="form-group">
-            <label class="col-sm-2 control-label">host</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" v-model="host">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">host</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-model="host">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">id</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-model="id">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">jsonrpc</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-model="jsonrpc">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">method</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-model="templates[selected]['method']">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">params</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="8" v-model="templates[selected]['params']"></textarea>
+                </div>
+              </div>
+
+              <div class="alert alert-danger col-sm-offset-2 col-sm-10" v-if="errorMessage" v-text="errorMessage"></div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" v-on="click: submit">Submit</button>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div><!--col-sm-6-->
+
+        <div class="col-sm-6">
+          <div v-if="response">
+            <h3>Response</h3>
+
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">formated</label>
+                <div class="col-sm-10">
+                  <div v-html="responsetable"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">row</label>
+                <div class="col-sm-10">
+                  <pre v-text="response"></pre>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label">id</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" v-model="id">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label">jsonrpc</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" v-model="jsonrpc">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label">method</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" v-model="method">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label">params</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" rows="5" v-model="params"></textarea>
-            </div>
-          </div>
-
-          <div class="alert alert-danger col-sm-offset-2 col-sm-10" v-if="errorMessage" v-text="errorMessage"></div>
-
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-default" v-on="click: submit">Submit</button>
-            </div>
-          </div>
-
-        </div>
-      </form>
-
-      <div v-if="response">
-        <h3>Response</h3>
-
-        <div class="form-horizontal">
-          <div class="form-group">
-            <label class="col-sm-2 control-label">formated</label>
-            <div class="col-sm-10">
-              <div v-html="responsetable"></div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label">row</label>
-            <div class="col-sm-10">
-              <pre v-text="response"></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        </div><!--col-sm-6-->
+      </div><!--row-->
+    </div><!--container-->
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
