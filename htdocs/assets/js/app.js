@@ -33,6 +33,20 @@ var form = new Vue({
       {
         method: "user/get",
         params: JSON.stringify({id: 1}, null, 2),
+      },
+      {
+        method: "image/upload/convert",
+        params: JSON.stringify({
+          tmp_key: "fate0267.jpg"
+        }, null, 2),
+      },
+      {
+        method: "image/upload/commit",
+        params: JSON.stringify({
+          tmp_key: "fate0267.jpg",
+          name: "image name",
+          description: "descdescdesc"
+        }, null, 2),
       }
     ],
     selected: 0,
@@ -41,6 +55,7 @@ var form = new Vue({
     jsonrpc: "2.0",
     errorMessage: "",
     response: "",
+    headertable: "",
     responsetable: ""
   },
   methods: {
@@ -75,15 +90,21 @@ var form = new Vue({
             params: params
           }
         }
-      }).done(function(data) {
+      }).done(function(data, textStatus, jqXHR) {
+        var header = {
+            status: jqXHR.status,
+            statusText: jqXHR.statusText
+        };
         self.$set('errorMessage', "");
         self.$set('response', JSON.stringify(data, null, 2));
         self.$set('responsetable', JsonHuman.format(data).outerHTML);
+        self.$set('headertable', JsonHuman.format(header).outerHTML);
 
       }).fail(function(data) {
         self.$set('errorMessage', "Failed to send request");
         self.$set('response', "");
         self.$set('responsetable', "");
+        self.$set('headertable', "");
       });
     }
   }
