@@ -31,10 +31,6 @@ var form = new Vue({
         params: JSON.stringify({}, null, 2),
       },
       {
-        method: "user/get",
-        params: JSON.stringify({id: 1}, null, 2),
-      },
-      {
         method: "image/upload/convert",
         params: JSON.stringify({
           tmp_key: "fate0267.jpg"
