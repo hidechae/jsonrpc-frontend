@@ -47,10 +47,39 @@ var form = new Vue({
           name: "image name",
           description: "descdescdesc"
         }, null, 2),
+      },
+      {
+        method: "image/find_arrival",
+        params: JSON.stringify({
+          offset: 0,
+          limit: 10
+        }, null, 2),
+      },
+      {
+        method: "image/find_by_user",
+        params: JSON.stringify({
+          user_id: "1",
+          offset: 0,
+          limit: 10
+        }, null, 2),
+      },
+      {
+        method: "image/find_by_keyword",
+        params: JSON.stringify({
+          keyword: "desc",
+          offset: 0,
+          limit: 10
+        }, null, 2),
+      },
+      {
+        method: "image/delete",
+        params: JSON.stringify({
+          id: "2"
+        }, null, 2),
       }
     ],
     selected: 0,
-    host: "http://dev.localhost:3000",
+    host: "http://vps-dev.cloudapp.net:3000/",
     id: "1234567890",
     jsonrpc: "2.0",
     errorMessage: "",

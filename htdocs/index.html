@@ -19,7 +19,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">templates</label>
                 <div class="col-sm-10">
-                  <select multiple class="form-control" id="templates" v-on="change: changeTemplate" autofocus>
+                  <select multiple class="form-control" id="templates" v-on="change: changeTemplate" autofocus style="height:200px">
                     <option v-repeat="templates" v-attr="selected:selected==$index?1:null">{{method}}</option>
                   </select>
                 </div>
